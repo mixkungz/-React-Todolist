@@ -25,3 +25,6 @@
 ul{
   list-style-type: none;
 }
+span.hlabel{
+  margin-bottom: 0.5em;
+}

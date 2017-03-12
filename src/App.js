@@ -31,7 +31,7 @@ class App extends Component {
   getTodo(){
     let outp='';
     for (let i = 0; i < this.state.todo.length; i++) {
-      outp += '<div class="alert alert-danger">'+this.state.todo[i].input+'</div>'
+      outp += '<li class="list-group-item text-left">'+this.state.todo[i].input+'<button class="btn btn-default" style="margin-left:1em;">></button>'+'</li>'
     }
     return outp
   }
@@ -48,7 +48,7 @@ class App extends Component {
             <div className="col-md-12">
               <form id="inputform" onSubmit={this.Submit.bind(this)}>
                 <div className="input-group">
-                  <input id="inp" type="text" className="form-control" placeholder="Coding" onChange={this.updateState.bind(this)} />
+                  <input id="inp" type="text" placeholder="Coding" className="form-control" value={this.state.input} onChange={this.updateState.bind(this)} />
                   <span className="input-group-btn">
                     <input className="btn btn-default" value="Save" type="submit"/>
                   </span>
@@ -62,18 +62,20 @@ class App extends Component {
         }}>
           <div className="row">
             <div className="col-xs-4">
-              <span className="label label-default">To do</span>
+              <span className="label label-default" style={{marginBottom:'1em'}}>To do</span>
+              <ul className="list-group">
                 <div dangerouslySetInnerHTML={{ __html: this.getTodo() }}></div>
+              </ul>
             </div>
             <div className="col-xs-4">
-              <span className="label label-warning">Doing</span>
+              <span className="label label-warning" style={{marginBottom:'0.25em'}}>Doing</span>
 
               <ul>
 
               </ul>
             </div>
             <div className="col-xs-4">
-              <span className="label label-success">Done</span>
+              <span className="label label-success" style={{marginBottom:'0.25em'}}>Done</span>
 
               <ul>
 
