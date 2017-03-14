@@ -6,15 +6,15 @@ class BtnChange extends React.Component {
     super(props)
     this.state = {}
   }
-
   render() {
     return(
       <div>
-        <button class="btn btn-default" style="margin-left:1em;" onClick={this.Submit.bind(this)}> > </button>
+        <li className="list-group-item">{this.props.txt}<button class="btn btn-default" style="margin-left:1em;"> > </button></li>
       </div>
     );
   }
 }
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -45,7 +45,7 @@ class App extends Component {
     let outp='';
     for (let i = 0; i < this.state.todo.length; i++) {
       if(this.state.todo[i].type === 'todo')
-      outp += `<li class="list-group-item text-left">`+this.state.todo[i].input+<BtnChange />+'</li>'
+      outp += <BtnChange key={i} txt={this.state.todo[i].input} onClick={this.Submit.bind(this)}/>
     }
     return outp
   }
@@ -88,7 +88,7 @@ class App extends Component {
             <div className="col-xs-4">
               <span className="label label-default" style={{marginBottom:'1em'}}>To do</span>
               <ul className="list-group">
-                <div dangerouslySetInnerHTML={{ __html: this.getTodo() }}></div>
+                <div>{this.getTodo()}</div>
               </ul>
             </div>
             <div className="col-xs-4">
@@ -110,6 +110,6 @@ class App extends Component {
       </div>
     );
   }
-}
 
+}
 export default App;
