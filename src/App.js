@@ -1,7 +1,20 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+class BtnChange extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
 
+  render() {
+    return(
+      <div>
+        <button class="btn btn-default" style="margin-left:1em;" onClick={this.Submit.bind(this)}> > </button>
+      </div>
+    );
+  }
+}
 class App extends Component {
   constructor(props) {
     super(props)
@@ -31,9 +44,20 @@ class App extends Component {
   getTodo(){
     let outp='';
     for (let i = 0; i < this.state.todo.length; i++) {
-      outp += '<li class="list-group-item text-left">'+this.state.todo[i].input+'<button class="btn btn-default" style="margin-left:1em;">></button>'+'</li>'
+      if(this.state.todo[i].type === 'todo')
+      outp += `<li class="list-group-item text-left">`+this.state.todo[i].input+<BtnChange />+'</li>'
     }
     return outp
+  }
+
+  change1(e){
+    e.preventDefault();
+    alert('55555')
+    this.setState({
+      type:'doing'
+    });
+    alert(e.target.key.value)
+    alert('22222')
   }
   render() {
     return (
