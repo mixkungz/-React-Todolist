@@ -9,7 +9,9 @@ class BtnChange extends React.Component {
   render() {
     return(
       <div>
-        <li className="list-group-item">{this.props.txt}<button class="btn btn-default" style="margin-left:1em;"> > </button></li>
+        <li className="list-group-item">{this.props.txt}<button className="btn btn-default" onClick={this.props.click} style={{
+          marginLeft: '1em',
+        }}> > </button></li>
       </div>
     );
   }
@@ -41,25 +43,43 @@ class App extends Component {
       input:''
     });
   }
-  getTodo(){
-    let outp='';
-    for (let i = 0; i < this.state.todo.length; i++) {
-      if(this.state.todo[i].type === 'todo')
-      outp += <BtnChange key={i} txt={this.state.todo[i].input} onClick={this.Submit.bind(this)}/>
-    }
-    return outp
-  }
 
-  change1(e){
+  change(e){
     e.preventDefault();
-    alert('55555')
-    this.setState({
-      type:'doing'
-    });
-    alert(e.target.key.value)
-    alert('22222')
+    if(this.state.type ==='todo'){
+      this.setState({
+        type:'doing'
+      });
+      this.state.todo[e.target.key].
+    }
+    else if(this.state.type === 'doing'){
+
+    }
+
   }
   render() {
+    let getTodo = this.state.todo.map((todo, i) => {
+      if (todo.type === 'todo') {
+        return <BtnChange key={i} txt={todo.input} click={this.change.bind(this)} />
+      } else {
+        return <div>error</div>
+      }
+    })
+    let getDoing = this.state.todo.map((todo, i) => {
+      if (todo.type === 'doing') {
+        return <BtnChange key={i} txt={todo.input} click={this.change.bind(this)} />
+      } else {
+        return <div>error</div>
+      }
+    })
+    let getDone = this.state.todo.map((todo, i) => {
+      if (todo.type === 'done') {
+        return <BtnChange key={i} txt={todo.input} click={this.change.bind(this)} />
+      } else {
+        return <div>error</div>
+      }
+    })
+
     return (
       <div>
         <div className="App">
@@ -88,19 +108,17 @@ class App extends Component {
             <div className="col-xs-4">
               <span className="label label-default" style={{marginBottom:'1em'}}>To do</span>
               <ul className="list-group">
-                <div>{this.getTodo()}</div>
+                <div>{getTodo}</div>
               </ul>
             </div>
             <div className="col-xs-4">
               <span className="label label-warning" style={{marginBottom:'0.25em'}}>Doing</span>
-
               <ul>
-
+                <div></div>
               </ul>
             </div>
             <div className="col-xs-4">
               <span className="label label-success" style={{marginBottom:'0.25em'}}>Done</span>
-
               <ul>
 
               </ul>
