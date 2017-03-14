@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import _ from 'underscore';
 import './App.css';
+
 class BtnChange extends React.Component {
   constructor(props) {
     super(props)
@@ -46,10 +48,14 @@ class App extends Component {
 
   change(e){
     e.preventDefault();
+    console.log(_.difference(this.state.todo,this.state.todo[e.target.value]))
     if(this.state.type ==='todo'){
-      this.state.todo[e.target.value].setState({
-        type:'doing'
+      this.state.todo[e.target.value].type = 'doing'
+
+      this.setState({
+        todo: _.difference(this.state.todo,this.state.todo[e.target.value]),
       })
+      this.state.doing.push(this.state.todo[e.target.value]);
     }
     else if(this.state.type === 'doing'){
 
@@ -61,21 +67,18 @@ class App extends Component {
       if (todo.type === 'todo') {
         return <BtnChange keys={i} txt={todo.input} click={this.change.bind(this)} />
       } else {
-        return <div>error</div>
       }
     })
     let getDoing = this.state.doing.map((doing, i) => {
       if (doing.type === 'doing') {
         return <BtnChange keys={i} txt={doing.input} click={this.change.bind(this)} />
       } else {
-        return <div>error</div>
       }
     })
     let getDone = this.state.todo.map((todo, i) => {
       if (todo.type === 'done') {
         return <BtnChange keys={i} txt={todo.input} click={this.change.bind(this)} />
       } else {
-        return <div>error</div>
       }
     })
 
@@ -113,13 +116,13 @@ class App extends Component {
             <div className="col-xs-4">
               <span className="label label-warning" style={{marginBottom:'0.25em'}}>Doing</span>
               <ul>
-                <div></div>
+                <div>{getDoing}</div>
               </ul>
             </div>
             <div className="col-xs-4">
               <span className="label label-success" style={{marginBottom:'0.25em'}}>Done</span>
               <ul>
-
+                <div>{getDone}</div>
               </ul>
             </div>
           </div>
