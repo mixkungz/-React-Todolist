@@ -48,17 +48,19 @@ class App extends Component {
 
   change(e){
     e.preventDefault();
-    console.log(_.difference(this.state.todo,this.state.todo[e.target.value]))
     if(this.state.type ==='todo'){
       this.state.todo[e.target.value].type = 'doing'
-
       this.setState({
-        todo: _.difference(this.state.todo,this.state.todo[e.target.value]),
+        todo: _.without(this.state.todo,this.state.todo[e.target.value]),
       })
       this.state.doing.push(this.state.todo[e.target.value]);
     }
     else if(this.state.type === 'doing'){
-
+      this.state.doing[e.target.value].type = 'done'
+      this.setState({
+        doing: _.without(this.state.doing,this.state.doing[e.target.value]),
+      })
+      this.state.done.push(this.state.doing[e.target.value]);
     }
 
   }
