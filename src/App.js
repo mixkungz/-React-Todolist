@@ -9,7 +9,7 @@ class BtnChange extends React.Component {
   render() {
     return(
       <div>
-        <li className="list-group-item">{this.props.txt}<button className="btn btn-default" onClick={this.props.click} style={{
+        <li className="list-group-item">{this.props.txt}<button className="btn btn-default" value={this.props.keys} onClick={this.props.click} style={{
           marginLeft: '1em',
         }}> > </button></li>
       </div>
@@ -47,10 +47,9 @@ class App extends Component {
   change(e){
     e.preventDefault();
     if(this.state.type ==='todo'){
-      this.setState({
+      this.state.todo[e.target.value].setState({
         type:'doing'
-      });
-      this.state.todo[e.target.key].
+      })
     }
     else if(this.state.type === 'doing'){
 
@@ -60,21 +59,21 @@ class App extends Component {
   render() {
     let getTodo = this.state.todo.map((todo, i) => {
       if (todo.type === 'todo') {
-        return <BtnChange key={i} txt={todo.input} click={this.change.bind(this)} />
+        return <BtnChange keys={i} txt={todo.input} click={this.change.bind(this)} />
       } else {
         return <div>error</div>
       }
     })
-    let getDoing = this.state.todo.map((todo, i) => {
-      if (todo.type === 'doing') {
-        return <BtnChange key={i} txt={todo.input} click={this.change.bind(this)} />
+    let getDoing = this.state.doing.map((doing, i) => {
+      if (doing.type === 'doing') {
+        return <BtnChange keys={i} txt={doing.input} click={this.change.bind(this)} />
       } else {
         return <div>error</div>
       }
     })
     let getDone = this.state.todo.map((todo, i) => {
       if (todo.type === 'done') {
-        return <BtnChange key={i} txt={todo.input} click={this.change.bind(this)} />
+        return <BtnChange keys={i} txt={todo.input} click={this.change.bind(this)} />
       } else {
         return <div>error</div>
       }
