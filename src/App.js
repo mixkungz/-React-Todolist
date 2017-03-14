@@ -18,7 +18,18 @@ class BtnChange extends React.Component {
     );
   }
 }
+class DoneItem extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { }
+  }
 
+  render() {
+    return (
+      <li className="list-group-item">{this.props.txt}</li>
+    );
+  }
+}
 class App extends Component {
   constructor(props) {
     super(props)
@@ -27,7 +38,7 @@ class App extends Component {
       'type':'todo',
       'todo' :[],
       'doing' : [],
-      'done' :[]
+      'done' :[],
     }
   }
   updateState(){
@@ -55,16 +66,15 @@ class App extends Component {
       })
       this.state.doing.push(this.state.todo[e.target.value]);
     }
-    else if(this.state.type === 'doing'){
-      alert('test in doing');
+    else if(this.state.doing[e.target.value].type === 'doing'){
       this.state.doing[e.target.value].type = 'done'
       this.setState({
         doing: _.without(this.state.doing,this.state.doing[e.target.value]),
       })
       this.state.done.push(this.state.doing[e.target.value]);
     }
-
   }
+
   render() {
     let getTodo = this.state.todo.map((todo, i) => {
       if (todo.type === 'todo') {
@@ -80,7 +90,7 @@ class App extends Component {
     })
     let getDone = this.state.done.map((done, i) => {
       if (done.type === 'done') {
-        return <BtnChange key={i} indexs={i} txt={done.input} click={this.change.bind(this)} />
+        return <DoneItem key={i} txt={done.input}/>
       } else {
       }
     })
