@@ -121,9 +121,6 @@ class App extends Component {
         <div className="App">
           <div className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
-            <p>To do list System</p>
-            <a href="https://facebook.com/pcr.mixkungz" target="_blank"><i className="fa fa-facebook-square" style={{fontSize:'1.7em',color:'white'}}></i></a>
-            <a href="https://github.com/mixkungz/reactbeginning" target="_blank"><i className="fa fa-github" style={{fontSize:'1.7em',marginLeft:'0.5em',color:'white'}}></i></a>
           </div>
         </div>
         <div className="container">
