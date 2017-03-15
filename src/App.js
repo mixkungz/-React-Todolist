@@ -66,7 +66,16 @@ class App extends Component {
       })
       this.state.doing.push(this.state.todo[e.target.value]);
     }
-    else if(this.state.doing[e.target.value].type === 'doing'){
+    // else if(this.state.doing[e.target.value].type === 'doing'){
+    //   this.state.doing[e.target.value].type = 'done'
+    //   this.setState({
+    //     doing: _.without(this.state.doing,this.state.doing[e.target.value]),
+    //   })
+    //   this.state.done.push(this.state.doing[e.target.value]);
+    // }
+  }
+  change2(e){
+    if(this.state.doing[e.target.value].type === 'doing'){
       this.state.doing[e.target.value].type = 'done'
       this.setState({
         doing: _.without(this.state.doing,this.state.doing[e.target.value]),
@@ -74,7 +83,6 @@ class App extends Component {
       this.state.done.push(this.state.doing[e.target.value]);
     }
   }
-
   render() {
     let getTodo = this.state.todo.map((todo, i) => {
       if (todo.type === 'todo') {
@@ -84,7 +92,7 @@ class App extends Component {
     })
     let getDoing = this.state.doing.map((doing, i) => {
       if (doing.type === 'doing') {
-        return <BtnChange key={i} indexs={i} txt={doing.input} click={this.change.bind(this)} />
+        return <BtnChange key={i} indexs={i} txt={doing.input} click={this.change2.bind(this)} />
       } else {
       }
     })
