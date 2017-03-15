@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import _ from 'underscore';
 import './App.css';
-
+import { default as swal } from 'sweetalert2'
 class BtnChange extends React.Component {
   constructor(props) {
     super(props)
@@ -48,13 +48,26 @@ class App extends Component {
   }
   Submit(e){
     e.preventDefault();
-    this.state.todo.push({
-      input:this.state.input,
-      type:this.state.type,
-    });
-    this.setState({
-      input:''
-    });
+    if(this.state.input.length >2){
+      this.state.todo.push({
+        input:this.state.input,
+        type:this.state.type,
+      });
+      this.setState({
+        input:''
+      });
+    }
+    else {
+      const swal = require('sweetalert2')
+      swal(
+        'Oops...',
+        'Input is too short!',
+        'error'
+      )
+      this.setState({
+        input:''
+      });
+    }
   }
 
   change(e){
