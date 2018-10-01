@@ -18,18 +18,11 @@ class BtnChange extends React.Component {
     );
   }
 }
-class DoneItem extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { }
-  }
 
-  render() {
-    return (
-      <li className="list-group-item">{this.props.txt}</li>
-    );
-  }
-}
+const DoneItem = ({txt}) => (
+   <li className="list-group-item">{txt}</li>
+)
+
 class App extends Component {
   constructor(props) {
     super(props)
